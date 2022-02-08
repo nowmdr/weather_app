@@ -4,20 +4,50 @@
       <div v-if="loader" class="loader">Loading...</div>
       <div v-else class="card">
         <div class="card__header">
-          <h1>{{ weather.location.name }}</h1>
-          <p>{{ weather.location.country }}</p>
-          <p>Local time: {{ weather.location.localtime.split(" ")[1] }}</p>
-        </div>
-        <div class="card__body">
-          <p>{{ weather.current.temp_c }}°C</p>
-          <p>Feel like{{ weather.current.feelslike_c }}°C</p>
-          <p>{{ weather.current.condition.text }}</p>
-          <div class="card__image">
-            <img
-              :src="`https:${weather.current.condition.icon}`"
-              alt="weather-description"
-            />
+          <div class="card__location">
+            <h1>{{ weather.location.name }}</h1>
+            <p>{{ weather.location.country }}</p>
+            <div>
+              <p>{{ weather.current.condition.text }}</p>
+              <p>Feel like{{ weather.current.feelslike_c }}°C</p>
+            </div>
           </div>
+          <div class="card__condition">
+            <p class="temperature">{{ weather.current.temp_c }}°C</p>
+            <div class="card__image">
+              <img
+                :src="`https:${weather.current.condition.icon}`"
+                alt="weather-description"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="card__body body">
+          <!-- <div class="body__header">
+            <p>More info</p><button class="card__button plus">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="ionicon"
+                viewBox="0 0 512 512"
+              >
+                <title>Add</title>
+                <path
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="32"
+                  d="M256 112v288M400 256H112"
+                />
+              </svg>
+            </button>
+          </div> -->
+          <p class="body__element time">
+            {{ weather.location.localtime.split(" ")[1] }}
+          </p>
+          <p class="body__element cloud">{{ weather.current.cloud }} %</p>
+          <p class="body__element wind">{{ weather.current.wind_mph }} m/h</p>
+          <p class="body__element humidity">{{ weather.current.humidity }} %</p>
         </div>
         <form @submit.prevent="fetchWeather()" class="card__form">
           <input

@@ -1,7 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700&display=swap");
 @import "../theme/variables.scss";
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;700&display=swap');
 * {
-  font-family: "Raleway", sans-serif;
+//   font-family: "Raleway", sans-serif;
+font-family: 'Quicksand', sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -21,25 +23,7 @@ h1{
 
 
 
-@mixin breakpoint($point) {
-  @if $point == lg {
-    @media (max-width: 1200px) {
-      @content;
-    }
-  } @else if $point == md {
-    @media (max-width: 991.98px) {
-      @content;
-    }
-  } @else if $point == sm {
-    @media (max-width: 767.98px) {
-      @content;
-    }
-  } @else if $point == xs {
-    @media (max-width: 479.98px) {
-      @content;
-    }
-  }
-}
+
 [class*="__container"] {
   max-width: 1300px;
   height: 100%;
