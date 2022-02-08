@@ -1,0 +1,15 @@
+$background:#F0F0F3;
+$blue:#1C2451;
+
+
+%drop-shadow{
+    background-color: $background;
+    box-shadow: -10px -10px 30px #FFFFFF, 
+    10px 10px 30px rgba(174, 174, 192, 0.4);
+    border-radius: 16px;
+}
+%inner-shadow{
+    background: #F0F0F3;
+    box-shadow: inset -10px -10px 30px #FFFFFF, inset 10px 10px 30px rgba(174, 174, 192, 0.4);
+    border-radius: 16px;
+}
