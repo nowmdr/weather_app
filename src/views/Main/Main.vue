@@ -56,7 +56,12 @@
               />
             </svg>
           </button>
-          <button @click.prevent="fetchWeather()" class="fetch-button">Get weather</button>
+          <button @click.prevent="fetchWeather()" class="fetch-button">
+            Get weather
+          </button>
+          <p :class="{ show: messageShow }" class="card__message">
+            {{ message }}
+          </p>
         </div>
       </div>
     </div>
@@ -72,7 +77,8 @@ export default {
   data: () => ({
     city: "London",
     weather: {},
-    image: require("@/assets/cloud.jpg"),
+    message: "",
+    messageShow: false,
     loader: true,
   }),
   mounted() {
@@ -82,42 +88,44 @@ export default {
     async fetchWeather() {
       const key = process.env.VUE_APP_WEATHER;
       try {
-        const data = await (
-          await axios.get(
+        await axios
+          .get(
             `https://api.weatherapi.com/v1/current.json?key=${key}&q=${this.city}&aqi=no`
           )
-        ).data;
-        console.log(data);
-        this.city = "";
-        this.weather = data;
-        console.log(
-          "🚀 ~ file: Main.vue ~ line 36 ~ fetchWeather ~ this.weather",
-          this.weather
-        );
+          .then((response) => {
+            if (response.status == 200) {
+              this.weather = response.data;
+              this.city = "";
+              this.messageShow = false;
+              this.message = "";
+            }
+          });
         this.loader = false;
       } catch (error) {
         console.log(
           "🚀 ~ file: Main.vue ~ line 27 ~ fetchWeather ~ error",
           error
         );
+        this.messageShow = true;
+        this.message = "City is no found";
       }
     },
     locator() {
+      this.message = "Search your location";
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
-            // this.getAddress(position.coords.latitude, position.coords.longitude)
-            console.log(position.coords.latitude, position.coords.longitude);
-            this.city = (`${position.coords.latitude} ${position.coords.longitude}`)
+            this.city = `${position.coords.latitude} ${position.coords.longitude}`;
             this.fetchWeather();
           },
           (error) => {
-            console.log(error.message);
+            this.message = error.message;
+            this.messageShow = true;
           }
         );
-        console.log("Yes");
       } else {
-        console.log("No");
+        this.message = "Your browser does not support localization";
+        this.messageShow = true;
       }
     },
   },

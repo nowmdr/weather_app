@@ -40,7 +40,6 @@
     grid-template-columns: repeat(2,auto);
     grid-template-rows: repeat(2,auto);
     gap: 10px 0px;
-    // justify-items: center;
     @include breakpoint(sm) {
 
     }
@@ -58,13 +57,16 @@
     width: 100%;
     @extend %drop-shadow;
     border: none;
-    // border-radius: 16px;
     border-top-left-radius:16px;
     border-bottom-left-radius: 16px;
     padding: 15px 25px;
+    font-size: 16px;
     outline: none;
     transition: all 1s ease;
     grid-area: Input;
+    @include breakpoint(sm){
+        font-size: 18px;
+    }
     &:focus {
       @extend %inner-shadow;
     }
@@ -75,6 +77,11 @@
             font-size: 18px;
         }
     }
+  }
+  &__message{
+      opacity: 0;
+      transition: opacity 1s ease;
+      color: $pink;
   }
 }
 .body {
@@ -90,9 +97,11 @@
   }
   .humidity {
     background-image: url(../../assets/humidity.svg);
+    justify-self: end;
   }
   .cloud {
     background-image: url(../../assets/cloud.svg);
+    justify-self: end;
   }
   .time {
     background-image: url(../../assets/time.svg);
@@ -143,4 +152,7 @@
     &:hover{
         color: $pink;
     }
+}
+.show{
+    opacity: 1;
 }
