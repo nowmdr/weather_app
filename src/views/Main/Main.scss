@@ -9,7 +9,7 @@
   max-width: 350px;
   @extend %drop-shadow;
   border-radius: 16px;
-  padding: 25px 30px;
+  padding: 25px 25px;
   &__header {
     display: flex;
     flex-direction: row;
@@ -22,13 +22,13 @@
     flex-direction: column;
     align-items: center;
   }
-  &__image{
-      width: 60px;
-      height: 60px;
-      img{
-          width: 100%;
-          height: auto;
-      }
+  &__image {
+    width: 60px;
+    height: 60px;
+    img {
+      width: 100%;
+      height: auto;
+    }
   }
   &__body {
     @extend %drop-shadow;
@@ -37,26 +37,43 @@
     margin-bottom: 20px;
 
     display: grid;
-    grid-template-columns: repeat(2,1fr); 
-    grid-template-rows: repeat(2,1fr);  
-    gap: 10px 40px;
-    @include breakpoint(sm){
-        gap: 10px 20px;
-        grid-template-columns: repeat(auto-fit,1fr); 
-    grid-template-rows: repeat(auto-fit,1fr);
+    grid-template-columns: repeat(2,auto);
+    grid-template-rows: repeat(2,auto);
+    gap: 10px 0px;
+    // justify-items: center;
+    @include breakpoint(sm) {
+
     }
   }
+  &__form{
+      display: grid;
+      grid-template-columns: repeat(2,auto);
+      grid-template-areas: 
+        "Input Location"
+        "Send Send"; 
+        grid-template-rows: 1fr 1fr; 
+      gap: 20px 0px;
+  }
   &__input {
-      width: 100%;
+    width: 100%;
     @extend %drop-shadow;
     border: none;
-    border-radius: 16px;
+    // border-radius: 16px;
+    border-top-left-radius:16px;
+    border-bottom-left-radius: 16px;
     padding: 15px 25px;
     outline: none;
-    position: relative;
     transition: all 1s ease;
+    grid-area: Input;
     &:focus {
       @extend %inner-shadow;
+    }
+    &::placeholder{
+        font-size: 16px;
+        color: $blue;
+        @include breakpoint(sm){
+            font-size: 18px;
+        }
     }
   }
 }
@@ -74,14 +91,56 @@
   .humidity {
     background-image: url(../../assets/humidity.svg);
   }
-  .cloud{
+  .cloud {
     background-image: url(../../assets/cloud.svg);
   }
-  .time{
+  .time {
     background-image: url(../../assets/time.svg);
   }
 }
 .temperature {
   font-size: 35px;
   font-weight: 700;
+  @include breakpoint(sm){
+    font-size: 45px;
+}
+}
+.location-button{
+    border: none;
+    @extend %drop-shadow;
+    // border-radius: 16px;
+    border-top-right-radius: 16px;
+    border-bottom-right-radius: 16px;
+    padding: 10px 10px;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    grid-area: Location;
+    & svg path{
+        transition: all 0.5s ease;
+    }
+    &:active{
+        @extend %inner-shadow; 
+    }
+    &:hover{
+        svg path{
+            fill: $pink;
+        }
+    }
+}
+.fetch-button{
+    font-size: 16px;
+    color: $blue;
+    border:none;
+    border-radius: 16px;
+    padding: 15px 25px;
+    cursor: pointer;
+    background-color: $background;
+    grid-area: Send;
+    @extend %drop-shadow;
+    &:active{
+        @extend %inner-shadow;
+    }
+    &:hover{
+        color: $pink;
+    }
 }
